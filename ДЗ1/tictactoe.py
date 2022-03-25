@@ -5,7 +5,7 @@ class TicTacGame:
 
     def __init__(self):
         self.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        self.player = '0'
+        self.player = 'x'
 
     def show_board(self):
         """ Отрисовывает текущее состояние доски """
@@ -14,18 +14,29 @@ class TicTacGame:
             print('|', self.board[0+3*i], '|', self.board[1+3*i], '|', self.board[2+3*i], '|')
         print('-'*13)
 
-    @staticmethod
-    def validate_input(move):
+    def empty_cells(self):
+        """ Проверяет, остались ли свободные клетки на доске.
+        Возвращает True, если остались, иначе - False """
+        for i in range(9):
+            if self.board[i] == i+1:
+                return True
+        return False
+
+    def validate_input(self, move):
         """ Проверка ввода пользователя.
         Возвращает True,
-        если было введено целое число от 1 до 9 """
+        если было введено целое число от 1 до 9
+        и данная клетка поля не занята """
         try:
             move = int(move)
         except ValueError:
             print("Вы ввели не целое число. Попробуйте ещё раз.")
             return False
         if move in range(1, 10):
-            return True
+            if self.board[move - 1] == move:
+                return True
+            print("Данная клетка уже занята, выберите другую.")
+            return False
         print("Недопустимое число. Попробуйте ещё раз.")
         return False
 
@@ -44,20 +55,20 @@ class TicTacGame:
 
     def start_game(self):
         """ Регулирует процесс игры """
-        while not self.check_winner():
-            if self.player == 'x':
-                self.player = '0'
-            else:
-                self.player = 'x'
+        while self.empty_cells():
             self.show_board()
             print(self.player + ", сделайте ход.")
             move = input()
             while not self.validate_input(move):
                 move = input()
-            move = int(move)
-            self.board[move-1] = self.player
+            self.board[int(move)-1] = self.player
+            if self.check_winner():
+                self.show_board()
+                print("Поздравляем " + self.player + " с победой!")
+                return
+            self.player = '0' if self.player == 'x' else 'x'
         self.show_board()
-        print("Поздравляем " + self.player + " с победой!")
+        print("Ничья!")
 
 if __name__ == "__main__":
     game = TicTacGame()
