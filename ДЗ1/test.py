@@ -28,7 +28,7 @@ class TestTicTacGame(unittest.TestCase):
         """ Тест validate_input целым числом,
         не попадающим в диапазон от 1 до 9 (больше) """
         game = TicTacGame()
-        self.assertFalse(game.validate_input('100'))
+        self.assertFalse(game.validate_input('10'))
 
     def test_validate_input_word(self):
         """ Тест validate_input """
