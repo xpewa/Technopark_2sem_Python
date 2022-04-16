@@ -18,41 +18,113 @@ class TestCustomList(unittest.TestCase):
         self.assertEqual(list2, [1, 0, 0, 0])
         self.assertEqual(list1, [1, 2, 3, 4])
 
-    def test_add_custom_and_custom(self):
+    def test_add_custom_and_custom_different_length(self):
         lst1 = CustomList([1, 2, 3])
         lst2 = CustomList([10])
         lst3 = lst1 + lst2
         self.assertEqual(lst3.data, [11, 2, 3])
+        self.assertEqual(lst1, [1, 2, 3])
+        self.assertEqual(lst2, [10])
+        self.assertEqual(type(lst3), CustomList)
 
-    def test_add_custom_and_list(self):
+    def test_add_custom_and_list_different_length(self):
         lst1 = CustomList([1, 2, 3])
         lst2 = [4, 5, 6, 7]
         lst3 = lst1 + lst2
         self.assertEqual(lst3.data, [5, 7, 9, 7])
+        self.assertEqual(lst1, [1, 2, 3])
+        self.assertEqual(lst2, [4, 5, 6, 7])
+        self.assertEqual(type(lst3), CustomList)
 
-    def test_add_list_and_custom(self):
+    def test_add_list_and_custom_different_length(self):
         lst1 = [0, 5]
         lst2 = CustomList([10, 10, 10, 10, 10])
         lst3 = lst1 + lst2
         self.assertEqual(lst3.data, [10, 15, 10, 10, 10])
+        self.assertEqual(lst1, [0, 5])
+        self.assertEqual(lst2, [10, 10, 10, 10, 10])
+        self.assertEqual(type(lst3), CustomList)
 
-    def test_sub_custom_and_custom(self):
+    def test_sub_custom_and_custom_different_length(self):
         lst1 = CustomList([1, 2, 3])
         lst2 = CustomList([10])
         lst3 = lst1 - lst2
         self.assertEqual(lst3.data, [-9, 2, 3])
+        self.assertEqual(lst1, [1, 2, 3])
+        self.assertEqual(lst2, [10])
+        self.assertEqual(type(lst3), CustomList)
 
-    def test_sub_custom_and_list(self):
+    def test_sub_custom_and_list_different_length(self):
         lst1 = CustomList([1, 2, 3])
         lst2 = [4, 5, 6, 7]
         lst3 = lst1 - lst2
         self.assertEqual(lst3.data, [-3, -3, -3, -7])
+        self.assertEqual(lst1, [1, 2, 3])
+        self.assertEqual(lst2, [4, 5, 6, 7])
+        self.assertEqual(type(lst3), CustomList)
 
-    def test_sub_list_and_custom(self):
+    def test_sub_list_and_custom_different_length(self):
         lst1 = [0, 5]
         lst2 = CustomList([10, 10, 10, 10, 10])
         lst3 = lst1 - lst2
         self.assertEqual(lst3.data, [-10, -5, -10, -10, -10])
+        self.assertEqual(lst1, [0, 5])
+        self.assertEqual(lst2, [10, 10, 10, 10, 10])
+        self.assertEqual(type(lst3), CustomList)
+
+    def test_add_custom_and_custom_same_length(self):
+        lst1 = CustomList([1])
+        lst2 = CustomList([10])
+        lst3 = lst1 + lst2
+        self.assertEqual(lst3.data, [11])
+        self.assertEqual(lst1, [1])
+        self.assertEqual(lst2, [10])
+        self.assertEqual(type(lst3), CustomList)
+
+    def test_add_custom_and_list_same_length(self):
+        lst1 = CustomList([1, 2, 3])
+        lst2 = [4, 5, 6]
+        lst3 = lst1 + lst2
+        self.assertEqual(lst3.data, [5, 7, 9])
+        self.assertEqual(lst1, [1, 2, 3])
+        self.assertEqual(lst2, [4, 5, 6])
+        self.assertEqual(type(lst3), CustomList)
+
+    def test_add_list_and_custom_same_length(self):
+        lst1 = [0, 5, 0, 5, 0]
+        lst2 = CustomList([10, 10, 10, 10, 10])
+        lst3 = lst1 + lst2
+        self.assertEqual(lst3.data, [10, 15, 10, 15, 10])
+        self.assertEqual(lst1, [0, 5, 0, 5, 0])
+        self.assertEqual(lst2, [10, 10, 10, 10, 10])
+        self.assertEqual(type(lst3), CustomList)
+
+    def test_sub_custom_and_custom_same_length(self):
+        lst1 = CustomList([1])
+        lst2 = CustomList([10])
+        lst3 = lst1 - lst2
+        self.assertEqual(lst3.data, [-9])
+        self.assertEqual(lst1, [1])
+        self.assertEqual(lst2, [10])
+        self.assertEqual(type(lst3), CustomList)
+
+    def test_sub_custom_and_list_same_length(self):
+        lst1 = CustomList([1, 2, 3])
+        lst2 = [4, 5, 6]
+        lst3 = lst1 - lst2
+        self.assertEqual(lst3.data, [-3, -3, -3])
+        self.assertEqual(lst1, [1, 2, 3])
+        self.assertEqual(lst2, [4, 5, 6])
+        self.assertEqual(type(lst3), CustomList)
+
+    def test_sub_list_and_custom_same_length(self):
+        lst1 = [0, 5, 0, 5, 0]
+        lst2 = CustomList([10, 10, 10, 10, 10])
+        lst3 = lst1 - lst2
+        self.assertEqual(lst3.data, [-10, -5, -10, -5, -10])
+        self.assertEqual(lst1, [0, 5, 0, 5, 0])
+        self.assertEqual(lst2, [10, 10, 10, 10, 10])
+        self.assertEqual(type(lst3), CustomList)
 
     def test_lt(self):
         self.assertTrue(CustomList([10]) < CustomList([100]))
